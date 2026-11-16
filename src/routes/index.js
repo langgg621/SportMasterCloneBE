@@ -11,7 +11,6 @@ router.use('/banners', require('./bannerRoutes'));
 router.use('/pickup-points', require('./pickupPointRoutes'));
 router.use('/chat', require('./chatRoutes'));
 router.use('/profile', require('./profileRoutes'));
-// Thêm dòng này
 router.use('/system-keys', require('./systemKeyRoutes'));
 
 module.exports = router;

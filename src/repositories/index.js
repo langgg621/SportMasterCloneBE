@@ -9,5 +9,5 @@ module.exports = {
   pickupPointRepository:  require('./pickupPointRepository'),
   chatRepository:         require('./chatRepository'),
   profileRepository:      require('./profileRepository'),
-  systemItemRepository:   require('./systemKeyRepository'),
+  systemKeyRepository:   require('./systemKeyRepository'),
 };
