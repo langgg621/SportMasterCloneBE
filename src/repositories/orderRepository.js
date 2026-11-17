@@ -65,7 +65,6 @@ const orderRepository = {
     };
   },
 
-  /** usp_orders_UpdateStatus (nội bộ/admin) */
   async updateStatus(orderId, newStatus) {
     const rows = await callProcedure('usp_orders_UpdateStatus', [orderId, newStatus]);
     return rows[0] || null;

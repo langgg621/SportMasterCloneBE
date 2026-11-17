@@ -3,29 +3,51 @@ const { Product } = require('../models');
 
 const productRepository = {
   /**
-   * usp_products_GetAllProduct — 14 params.
+   * usp_products_GetAllProduct — 31 params (thứ tự phải khớp với procedure).
    * Dùng `??` để biến undefined -> null (tránh lỗi bind param của mysql2).
+   * Các filter nhiều giá trị nhận chuỗi "a,b,c" (FIND_IN_SET ở phía SQL).
    */
-  async list(filters = {}) {
+  async list(filters) {
+    // Checkbox: chỉ lọc khi là 1 / '1' / true; '0', '', undefined -> null
+    const flag = (v) => (v === true || v === 1 || v === '1' || v === 'true' ? 1 : null);
+
     const rows = await callProcedure('usp_products_GetAllProduct', [
       filters.categoryId ?? null,
       filters.brandIds ?? null,
       filters.gender ?? null,
       filters.sportType ?? null,
       filters.season ?? null,
-      filters.size ?? null,
-      filters.colorId ?? null,
+      filters.sizes ?? null,
+      filters.colorIds ?? null,
       filters.minPrice ?? null,
       filters.maxPrice ?? null,
-      filters.onlySale ? 1 : null,
+      flag(filters.onlySale),
       filters.keyword ?? null,
       filters.sortBy ?? 'newest',
       filters.page ?? 1,
       filters.pageSize ?? 20,
+      // Tham số lọc thuộc tính
+      filters.fastener ?? null,
+      filters.material ?? null,
+      filters.pronation ?? null,
+      filters.training ?? null,
+      flag(filters.isBarefoot),
+      // Tham số mới (12)
+      filters.soleColor ?? null,
+      filters.shoeWidth ?? null,
+      filters.waterProtection ?? null,
+      filters.insulation ?? null,
+      filters.technologies ?? null,
+      filters.collectionIds ?? null,
+      flag(filters.isBestPrice),
+      flag(filters.isNew),
+      flag(filters.isComingSoon),
+      flag(filters.isExclusive),
+      flag(filters.isPremium),
+      flag(filters.isEco),
     ]);
     return Product.fromList(rows);
   },
-
   /** usp_products_GetByFlag */
   async getByFlag(flag, limit = 10) {
     const rows = await callProcedure('usp_products_GetByFlag', [flag, limit]);

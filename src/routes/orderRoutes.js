@@ -11,5 +11,6 @@ router.get('/', ctrl.list);
 router.get('/:id', ctrl.getDetail);
 router.get('/:id/confirmation', ctrl.getConfirmation);
 router.put('/:id/cancel', ctrl.cancel);
+router.put('/:id/status', ctrl.updateStatus);
 
 module.exports = router;
