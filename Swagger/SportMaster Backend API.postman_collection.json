@@ -1,0 +1,3139 @@
+{
+  "info": {
+    "_postman_id": "65465965-b907-4bc9-b717-f070cda27607",
+    "name": "SportMaster Backend API",
+    "description": "Complete OpenAPI 3.0 specification for SportMaster Backend (Node.js + Express + MySQL Stored Procedures), organized by route modules.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "28876384"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Linh Pham\",\n  \"password\": \"Secret123!\",\n  \"email\": \"linh@sportmaster.com\",\n  \"userName\": \"linhpham\",\n  \"phone\": \"+79099089012\",\n  \"address\": \"Tomsk, Buyanovskiy Pereulok, 3A\",\n  \"sex\": 0\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "User registered successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fullName\": \"Linh Pham\",\n  \"password\": \"Secret123!\",\n  \"email\": \"linh@sportmaster.com\",\n  \"userName\": \"linhpham\",\n  \"phone\": \"+79099089012\",\n  \"address\": \"Tomsk, Buyanovskiy Pereulok, 3A\",\n  \"sex\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"UserID\": \"u1111111-1111-1111-1111-111111111111\",\n  \"FullName\": \"ЛИНЬ\",\n  \"UserName\": \"linhpham\",\n  \"Email\": \"lpham342002@gmail.com\",\n  \"Phone\": \"+79099089012\",\n  \"Address\": \"Томск, Буяновский переулок, 3А\",\n  \"Sex\": 0,\n  \"BonusPoints\": 200,\n  \"MembershipRank\": 2,\n  \"CreatedDate\": \"2005-09-03T21:48:40.984Z\",\n  \"UpdateDate\": \"1953-02-03T21:10:07.853Z\"\n}"
+            },
+            {
+              "name": "Validation error (EMAIL_EXISTS, PHONE_EXISTS, USERNAME_EXISTS)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fullName\": \"Linh Pham\",\n  \"password\": \"Secret123!\",\n  \"email\": \"linh@sportmaster.com\",\n  \"userName\": \"linhpham\",\n  \"phone\": \"+79099089012\",\n  \"address\": \"Tomsk, Buyanovskiy Pereulok, 3A\",\n  \"sex\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@sportmaster.com\",\n  \"password\": \"NewSecret123!\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Login successful",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"test@sportmaster.com\",\n  \"password\": \"123456\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"user\": {\n    \"UserID\": \"u1111111-1111-1111-1111-111111111111\",\n    \"FullName\": \"ЛИНЬ\",\n    \"UserName\": \"linhpham\",\n    \"Email\": \"lpham342002@gmail.com\",\n    \"Phone\": \"+79099089012\",\n    \"Address\": \"Томск, Буяновский переулок, 3А\",\n    \"Sex\": 0,\n    \"BonusPoints\": 200,\n    \"MembershipRank\": 2,\n    \"CreatedDate\": \"1992-10-19T23:53:14.985Z\",\n    \"UpdateDate\": \"2005-06-13T00:38:49.535Z\"\n  }\n}"
+            },
+            {
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"test@sportmaster.com\",\n  \"password\": \"123456\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "login"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Get user profile by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "User profile details",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:userId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "userId",
+                      "value": "u1111111-1111-1111-1111-111111111111"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"UserID\": \"u1111111-1111-1111-1111-111111111111\",\n  \"FullName\": \"ЛИНЬ\",\n  \"UserName\": \"linhpham\",\n  \"Email\": \"lpham342002@gmail.com\",\n  \"Phone\": \"+79099089012\",\n  \"Address\": \"Томск, Буяновский переулок, 3А\",\n  \"Sex\": 0,\n  \"BonusPoints\": 200,\n  \"MembershipRank\": 2,\n  \"CreatedDate\": \"2005-09-03T21:48:40.984Z\",\n  \"UpdateDate\": \"1953-02-03T21:10:07.853Z\"\n}"
+            },
+            {
+              "name": "User not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:userId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "userId",
+                      "value": "u1111111-1111-1111-1111-111111111111"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "UpdateProfile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Linh Pham Updated\",\n  \"userName\": \"linhpham\",\n  \"phone\": \"0999999999\",\n  \"address\": \"Tomsk, Lenin Ave, 54\",\n  \"sex\": 1\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Updated user profile",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fullName\": \"Linh Pham Updated\",\n  \"userName\": \"linhpham\",\n  \"phone\": \"0999999999\",\n  \"address\": \"Tomsk, Lenin Ave, 54\",\n  \"sex\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/:userId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "userId",
+                      "value": "1a696152-e03d-11f1-a297-002b67aa92f3"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"UserID\": \"u1111111-1111-1111-1111-111111111111\",\n  \"FullName\": \"ЛИНЬ\",\n  \"UserName\": \"linhpham\",\n  \"Email\": \"lpham342002@gmail.com\",\n  \"Phone\": \"+79099089012\",\n  \"Address\": \"Томск, Буяновский переулок, 3А\",\n  \"Sex\": 0,\n  \"BonusPoints\": 200,\n  \"MembershipRank\": 2,\n  \"CreatedDate\": \"2005-09-03T21:48:40.984Z\",\n  \"UpdateDate\": \"1953-02-03T21:10:07.853Z\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "ChangePassword",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"123456\",\n  \"newPassword\": \"NewSecret123!\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/change-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "change-password"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Password updated successfully",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"newPassword\": \"NewSecret123!\",\n  \"oldPassword\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/:userId/password",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":userId",
+                    "password"
+                  ],
+                  "variable": [
+                    {
+                      "key": "userId",
+                      "value": "u1111111-1111-1111-1111-111111111111"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "profile",
+      "item": [
+        {
+          "name": "Get active profile menu items (usp_profile_GetMenu)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/profile/menu?userId=u1111111-1111-1111-1111-111111111111",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "profile",
+                "menu"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "u1111111-1111-1111-1111-111111111111"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "List of profile menu items",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/profile/menu?userId=u1111111-1111-1111-1111-111111111111",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "profile",
+                    "menu"
+                  ],
+                  "query": [
+                    {
+                      "key": "userId",
+                      "value": "u1111111-1111-1111-1111-111111111111"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"MenuID\": \"912fa760-e1c4-11f1-904e-002b67aa92f3\",\n    \"Title\": \"Мои заказы\",\n    \"Icon\": \"bag-handle-outline\",\n    \"BadgeText\": \"1\",\n    \"IsNew\": 0,\n    \"SortOrder\": 1\n  },\n  {\n    \"MenuID\": \"912fa760-e1c4-11f1-904e-002b67aa92f3\",\n    \"Title\": \"Мои заказы\",\n    \"Icon\": \"bag-handle-outline\",\n    \"BadgeText\": \"1\",\n    \"IsNew\": 0,\n    \"SortOrder\": 1\n  }\n]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "catalog",
+      "item": [
+        {
+          "name": "Get all product colors (usp_colors_GetAll)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/catalog/colors",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "catalog",
+                "colors"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "List of colors",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/catalog/colors",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "catalog",
+                    "colors"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"ColorID\": \"col-black\",\n    \"ColorName\": \"Черный\",\n    \"ColorType\": \"#111111\"\n  },\n  {\n    \"ColorID\": \"col-black\",\n    \"ColorName\": \"Черный\",\n    \"ColorType\": \"#111111\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get active daily deals (usp_dailyDeals_GetActive)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/catalog/daily-deals?limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "catalog",
+                "daily-deals"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Active daily deals with discounted prices",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/catalog/daily-deals?limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "catalog",
+                    "daily-deals"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"DealID\": \"aab25a52-e038-11f1-a297-002b67aa92f3\",\n    \"ProductID\": \"p01\",\n    \"StartAt\": \"1950-11-28T01:58:54.722Z\",\n    \"EndAt\": \"2025-10-23T04:54:12.362Z\",\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"SKU\": \"SKU-P01\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"ImageUrl\": \"string\"\n  },\n  {\n    \"DealID\": \"aab25a52-e038-11f1-a297-002b67aa92f3\",\n    \"ProductID\": \"p01\",\n    \"StartAt\": \"2008-05-25T11:20:26.850Z\",\n    \"EndAt\": \"1974-09-05T12:37:29.075Z\",\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"SKU\": \"SKU-P01\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"ImageUrl\": \"string\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get all product collections (usp_collections_GetAll)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/catalog/collections",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "catalog",
+                "collections"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "List of collections",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/catalog/collections",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "catalog",
+                    "collections"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"CollectionID\": \"col-1\",\n    \"CollectionName\": \"Новая коллекция\"\n  },\n  {\n    \"CollectionID\": \"col-1\",\n    \"CollectionName\": \"Новая коллекция\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get catalog navigation sections (usp_catalog_GetSections)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/catalog/sections",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "catalog",
+                "sections"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Catalog sections grouped by service, gender, category, sport",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/catalog/sections",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "catalog",
+                    "sections"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"ItemID\": \"sec-1\",\n    \"SectionType\": \"gender\",\n    \"Title\": \"Женщинам\",\n    \"ImageUrl\": \"string\",\n    \"LinkUrl\": \"women\",\n    \"SortOrder\": 201\n  },\n  {\n    \"ItemID\": \"sec-1\",\n    \"SectionType\": \"gender\",\n    \"Title\": \"Женщинам\",\n    \"ImageUrl\": \"string\",\n    \"LinkUrl\": \"women\",\n    \"SortOrder\": 201\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get all active categories or filter by ParentID (usp_categories_GetAll / usp_categories_GetByParentID)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/catalog/categories?parentId=string",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "catalog",
+                "categories"
+              ],
+              "query": [
+                {
+                  "key": "parentId",
+                  "value": "string",
+                  "description": "Optional Parent Category UUID"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "List of categories",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/catalog/categories?parentId=string",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "catalog",
+                    "categories"
+                  ],
+                  "query": [
+                    {
+                      "description": "Optional Parent Category UUID",
+                      "key": "parentId",
+                      "value": "string"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"CategoryID\": \"c1111111-1111-1111-1111-111111111111\",\n    \"Name\": \"Обувь\",\n    \"Icon\": \"footsteps-outline\",\n    \"ParentID\": null,\n    \"IsActive\": true\n  },\n  {\n    \"CategoryID\": \"c1111111-1111-1111-1111-111111111111\",\n    \"Name\": \"Обувь\",\n    \"Icon\": \"footsteps-outline\",\n    \"ParentID\": null,\n    \"IsActive\": true\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get all brands ordered by name (usp_brand_GetAll)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/catalog/brands",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "catalog",
+                "brands"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "List of brands",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/catalog/brands",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "catalog",
+                    "brands"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"BrandID\": \"b7777777-7777-7777-7777-777777777777\",\n    \"Name\": \"Nike\",\n    \"logo_url\": \"../constants/brands/puma.png\"\n  },\n  {\n    \"BrandID\": \"b7777777-7777-7777-7777-777777777777\",\n    \"Name\": \"Nike\",\n    \"logo_url\": \"../constants/brands/puma.png\"\n  }\n]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "banners",
+      "item": [
+        {
+          "name": "Get active banners by type (usp_banners_GetByType)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/banners?type=2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "banners"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "2",
+                  "description": "1 = Main, 2 = Discount, 3 = Single"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "List of active banners",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/banners?type=2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "banners"
+                  ],
+                  "query": [
+                    {
+                      "description": "1 = Main, 2 = Discount, 3 = Single",
+                      "key": "type",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"BannerID\": \"bn111111-1111-1111-1111-111111111111\",\n    \"Title\": \"Скидки месяца\",\n    \"ImageUrl\": \"string\",\n    \"LinkUrl\": \"CatalogTab\",\n    \"IsActive\": 1,\n    \"DisplayOrder\": 1,\n    \"Type\": 1\n  },\n  {\n    \"BannerID\": \"bn111111-1111-1111-1111-111111111111\",\n    \"Title\": \"Скидки месяца\",\n    \"ImageUrl\": \"string\",\n    \"LinkUrl\": \"CatalogTab\",\n    \"IsActive\": 1,\n    \"DisplayOrder\": 1,\n    \"Type\": 1\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get primary single promo banner (usp_banners_GetSingle)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/banners/single",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "banners",
+                "single"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Single promotional banner",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/banners/single",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "banners",
+                    "single"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"BannerID\": \"bn111111-1111-1111-1111-111111111111\",\n  \"Title\": \"Скидки месяца\",\n  \"ImageUrl\": \"string\",\n  \"LinkUrl\": \"CatalogTab\",\n  \"IsActive\": 1,\n  \"DisplayOrder\": 1,\n  \"Type\": 1\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "products",
+      "item": [
+        {
+          "name": "GetAll",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "categoryId",
+                  "value": "c1111111-1111-1111-1111-111111111111",
+                  "disabled": true
+                },
+                {
+                  "key": "brandIds",
+                  "value": "string",
+                  "description": "Comma-separated BrandIDs",
+                  "disabled": true
+                },
+                {
+                  "key": "gender",
+                  "value": "4",
+                  "description": "1=Men, 2=Women, 3=Unisex, 4=Kids",
+                  "disabled": true
+                },
+                {
+                  "key": "sportType",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "season",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "sizes",
+                  "value": "string",
+                  "description": "Comma-separated sizes (e.g. 40,41,42)",
+                  "disabled": true
+                },
+                {
+                  "key": "colorIds",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "minPrice",
+                  "value": "2827.798150806744",
+                  "disabled": true
+                },
+                {
+                  "key": "maxPrice",
+                  "value": "2827.798150806744",
+                  "disabled": true
+                },
+                {
+                  "key": "onlySale",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "keyword",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "sortBy",
+                  "value": "newest",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "pageSize",
+                  "value": "20",
+                  "disabled": true
+                },
+                {
+                  "key": "fastener",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "material",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "pronation",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "training",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "isBarefoot",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "soleColor",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "shoeWidth",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "waterProtection",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "insulation",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "technologies",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "collectionIds",
+                  "value": "string",
+                  "disabled": true
+                },
+                {
+                  "key": "isBestPrice",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "isNew",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "isComingSoon",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "isExclusive",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "isPremium",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "isEco",
+                  "value": "1",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Paginated product list",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/products?categoryId=c1111111-1111-1111-1111-111111111111&brandIds=string&gender=4&sportType=string&season=string&sizes=string&colorIds=string&minPrice=2827.798150806744&maxPrice=2827.798150806744&onlySale=1&keyword=string&sortBy=newest&page=1&pageSize=20&fastener=string&material=string&pronation=string&training=string&isBarefoot=1&soleColor=string&shoeWidth=string&waterProtection=string&insulation=string&technologies=string&collectionIds=string&isBestPrice=1&isNew=1&isComingSoon=1&isExclusive=1&isPremium=1&isEco=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "key": "categoryId",
+                      "value": "c1111111-1111-1111-1111-111111111111"
+                    },
+                    {
+                      "description": "Comma-separated BrandIDs",
+                      "key": "brandIds",
+                      "value": "string"
+                    },
+                    {
+                      "description": "1=Men, 2=Women, 3=Unisex, 4=Kids",
+                      "key": "gender",
+                      "value": "4"
+                    },
+                    {
+                      "key": "sportType",
+                      "value": "string"
+                    },
+                    {
+                      "key": "season",
+                      "value": "string"
+                    },
+                    {
+                      "description": "Comma-separated sizes (e.g. 40,41,42)",
+                      "key": "sizes",
+                      "value": "string"
+                    },
+                    {
+                      "key": "colorIds",
+                      "value": "string"
+                    },
+                    {
+                      "key": "minPrice",
+                      "value": "2827.798150806744"
+                    },
+                    {
+                      "key": "maxPrice",
+                      "value": "2827.798150806744"
+                    },
+                    {
+                      "key": "onlySale",
+                      "value": "1"
+                    },
+                    {
+                      "key": "keyword",
+                      "value": "string"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "newest"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "fastener",
+                      "value": "string"
+                    },
+                    {
+                      "key": "material",
+                      "value": "string"
+                    },
+                    {
+                      "key": "pronation",
+                      "value": "string"
+                    },
+                    {
+                      "key": "training",
+                      "value": "string"
+                    },
+                    {
+                      "key": "isBarefoot",
+                      "value": "1"
+                    },
+                    {
+                      "key": "soleColor",
+                      "value": "string"
+                    },
+                    {
+                      "key": "shoeWidth",
+                      "value": "string"
+                    },
+                    {
+                      "key": "waterProtection",
+                      "value": "string"
+                    },
+                    {
+                      "key": "insulation",
+                      "value": "string"
+                    },
+                    {
+                      "key": "technologies",
+                      "value": "string"
+                    },
+                    {
+                      "key": "collectionIds",
+                      "value": "string"
+                    },
+                    {
+                      "key": "isBestPrice",
+                      "value": "1"
+                    },
+                    {
+                      "key": "isNew",
+                      "value": "1"
+                    },
+                    {
+                      "key": "isComingSoon",
+                      "value": "1"
+                    },
+                    {
+                      "key": "isExclusive",
+                      "value": "1"
+                    },
+                    {
+                      "key": "isPremium",
+                      "value": "1"
+                    },
+                    {
+                      "key": "isEco",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"ProductID\": \"p01\",\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"SKU\": \"SKU-P01\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"CategoryID\": \"c1111111-1111-1111-1111-111111111111\",\n    \"BrandID\": \"b7777777-7777-7777-7777-777777777777\",\n    \"BrandName\": \"Nike\",\n    \"CategoryName\": \"Обувь\",\n    \"Gender\": 1,\n    \"Season\": \"Лето\",\n    \"SportType\": \"Бег\",\n    \"ImageUrl\": \"string\",\n    \"TotalStock\": 69,\n    \"TotalCount\": 50,\n    \"TotalPages\": 3,\n    \"CurrentPage\": 1\n  },\n  {\n    \"ProductID\": \"p01\",\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"SKU\": \"SKU-P01\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"CategoryID\": \"c1111111-1111-1111-1111-111111111111\",\n    \"BrandID\": \"b7777777-7777-7777-7777-777777777777\",\n    \"BrandName\": \"Nike\",\n    \"CategoryName\": \"Обувь\",\n    \"Gender\": 1,\n    \"Season\": \"Лето\",\n    \"SportType\": \"Бег\",\n    \"ImageUrl\": \"string\",\n    \"TotalStock\": 69,\n    \"TotalCount\": 50,\n    \"TotalPages\": 3,\n    \"CurrentPage\": 1\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "GetByFlag",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products/flag/:flag?limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                "flag",
+                ":flag"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "flag",
+                  "value": "new_collection"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Filtered products by flag",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/products/flag/:flag?limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "flag",
+                    ":flag"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "flag",
+                      "value": "new_collection"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"ProductID\": \"p01\",\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"SKU\": \"SKU-P01\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"CategoryID\": \"c1111111-1111-1111-1111-111111111111\",\n    \"BrandID\": \"b7777777-7777-7777-7777-777777777777\",\n    \"BrandName\": \"Nike\",\n    \"CategoryName\": \"Обувь\",\n    \"Gender\": 1,\n    \"Season\": \"Лето\",\n    \"SportType\": \"Бег\",\n    \"ImageUrl\": \"string\",\n    \"TotalStock\": 69,\n    \"TotalCount\": 50,\n    \"TotalPages\": 3,\n    \"CurrentPage\": 1\n  },\n  {\n    \"ProductID\": \"p01\",\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"SKU\": \"SKU-P01\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"CategoryID\": \"c1111111-1111-1111-1111-111111111111\",\n    \"BrandID\": \"b7777777-7777-7777-7777-777777777777\",\n    \"BrandName\": \"Nike\",\n    \"CategoryName\": \"Обувь\",\n    \"Gender\": 1,\n    \"Season\": \"Лето\",\n    \"SportType\": \"Бег\",\n    \"ImageUrl\": \"string\",\n    \"TotalStock\": 69,\n    \"TotalCount\": 50,\n    \"TotalPages\": 3,\n    \"CurrentPage\": 1\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "GetRelated",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products/:productId/related?limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                ":productId",
+                "related"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": "p01"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Related products",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/products/:productId/related?limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    ":productId",
+                    "related"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "productId",
+                      "value": "p01"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"ProductID\": \"p01\",\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"SKU\": \"SKU-P01\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"CategoryID\": \"c1111111-1111-1111-1111-111111111111\",\n    \"BrandID\": \"b7777777-7777-7777-7777-777777777777\",\n    \"BrandName\": \"Nike\",\n    \"CategoryName\": \"Обувь\",\n    \"Gender\": 1,\n    \"Season\": \"Лето\",\n    \"SportType\": \"Бег\",\n    \"ImageUrl\": \"string\",\n    \"TotalStock\": 69,\n    \"TotalCount\": 50,\n    \"TotalPages\": 3,\n    \"CurrentPage\": 1\n  },\n  {\n    \"ProductID\": \"p01\",\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"SKU\": \"SKU-P01\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"CategoryID\": \"c1111111-1111-1111-1111-111111111111\",\n    \"BrandID\": \"b7777777-7777-7777-7777-777777777777\",\n    \"BrandName\": \"Nike\",\n    \"CategoryName\": \"Обувь\",\n    \"Gender\": 1,\n    \"Season\": \"Лето\",\n    \"SportType\": \"Бег\",\n    \"ImageUrl\": \"string\",\n    \"TotalStock\": 69,\n    \"TotalCount\": 50,\n    \"TotalPages\": 3,\n    \"CurrentPage\": 1\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "GetByID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products/:productId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                ":productId"
+              ],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": "p01"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Full product detail object",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/products/:productId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    ":productId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "productId",
+                      "value": "p01"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"ProductID\": \"p01\",\n  \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n  \"SKU\": \"SKU-P01\",\n  \"Price\": 11990,\n  \"Discount\": 10,\n  \"NewPrice\": 10791,\n  \"CategoryID\": \"c1111111-1111-1111-1111-111111111111\",\n  \"BrandID\": \"b7777777-7777-7777-7777-777777777777\",\n  \"BrandName\": \"Nike\",\n  \"CategoryName\": \"Обувь\",\n  \"Gender\": 1,\n  \"Season\": \"Лето\",\n  \"SportType\": \"Бег\",\n  \"ImageUrl\": \"string\",\n  \"TotalStock\": 69,\n  \"TotalCount\": 50,\n  \"TotalPages\": 3,\n  \"CurrentPage\": 1,\n  \"Description\": \"Легендарная амортизация для ежедневных пробежек.\",\n  \"BonusAmount\": 539,\n  \"UpperMaterial\": \"Сетка\",\n  \"Fastener\": \"Шнуровка\",\n  \"WaterProtection\": \"Отсутствует\",\n  \"Insulation\": \"Без утеплителя\",\n  \"Pronation\": \"Нейтральная\",\n  \"TrainingType\": \"Бег по асфальту\",\n  \"ShoeWidth\": \"Стандартная\",\n  \"SoleColor\": \"Белый\",\n  \"SizesJson\": [\n    {\n      \"sizeID\": \"fa53ee5c-e0ac-11f1-a297-002b67aa92f3\",\n      \"size\": \"41\",\n      \"stock\": 8,\n      \"cm\": 5861.52802153113\n    },\n    {\n      \"sizeID\": \"fa53ee5c-e0ac-11f1-a297-002b67aa92f3\",\n      \"size\": \"41\",\n      \"stock\": 8,\n      \"cm\": 7987.997698614642\n    }\n  ],\n  \"ColorsJson\": [\n    {\n      \"colorID\": \"col11111-1111-1111-1111-111111111111\",\n      \"name\": \"Белый\",\n      \"type\": \"white\"\n    },\n    {\n      \"colorID\": \"col11111-1111-1111-1111-111111111111\",\n      \"name\": \"Белый\",\n      \"type\": \"white\"\n    }\n  ],\n  \"TechnologiesJson\": [\n    \"EVA\",\n    \"EVA\"\n  ],\n  \"CharacteristicsJson\": [\n    {\n      \"key\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"key\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"AvgRating\": 5,\n  \"ReviewCount\": 2\n}"
+            },
+            {
+              "name": "Product not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/products/:productId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    ":productId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "productId",
+                      "value": "p01"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "GetFrequentlyBought",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products/:productId/frequently-bought?limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                ":productId",
+                "frequently-bought"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": "p01"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Frequently bought together products",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/products/:productId/frequently-bought?limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    ":productId",
+                    "frequently-bought"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "productId",
+                      "value": "p01"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"ProductID\": \"p01\",\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"SKU\": \"SKU-P01\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"CategoryID\": \"c1111111-1111-1111-1111-111111111111\",\n    \"BrandID\": \"b7777777-7777-7777-7777-777777777777\",\n    \"BrandName\": \"Nike\",\n    \"CategoryName\": \"Обувь\",\n    \"Gender\": 1,\n    \"Season\": \"Лето\",\n    \"SportType\": \"Бег\",\n    \"ImageUrl\": \"string\",\n    \"TotalStock\": 69,\n    \"TotalCount\": 50,\n    \"TotalPages\": 3,\n    \"CurrentPage\": 1\n  },\n  {\n    \"ProductID\": \"p01\",\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"SKU\": \"SKU-P01\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"CategoryID\": \"c1111111-1111-1111-1111-111111111111\",\n    \"BrandID\": \"b7777777-7777-7777-7777-777777777777\",\n    \"BrandName\": \"Nike\",\n    \"CategoryName\": \"Обувь\",\n    \"Gender\": 1,\n    \"Season\": \"Лето\",\n    \"SportType\": \"Бег\",\n    \"ImageUrl\": \"string\",\n    \"TotalStock\": 69,\n    \"TotalCount\": 50,\n    \"TotalPages\": 3,\n    \"CurrentPage\": 1\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "GetSections",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products/:productId/sections",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                ":productId",
+                "sections"
+              ],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": "p01"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Product editorial sections",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/products/:productId/sections",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    ":productId",
+                    "sections"
+                  ],
+                  "variable": [
+                    {
+                      "key": "productId",
+                      "value": "p01"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"SectionKey\": \"technology\",\n    \"Title\": \"Технологии\",\n    \"Body\": \"EVA\"\n  },\n  {\n    \"SectionKey\": \"technology\",\n    \"Title\": \"Технологии\",\n    \"Body\": \"EVA\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "GetSpecs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products/:productId/specs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                ":productId",
+                "specs"
+              ],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": "p01"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Product specifications",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/products/:productId/specs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    ":productId",
+                    "specs"
+                  ],
+                  "variable": [
+                    {
+                      "key": "productId",
+                      "value": "p01"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"GroupTitle\": \"Конструктивные особенности\",\n    \"Label\": \"Материал верха\",\n    \"SpecValue\": \"Сетка\",\n    \"SortOrder\": 10\n  },\n  {\n    \"GroupTitle\": \"Конструктивные особенности\",\n    \"Label\": \"Материал верха\",\n    \"SpecValue\": \"Сетка\",\n    \"SortOrder\": 10\n  }\n]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cart",
+      "item": [
+        {
+          "name": "AddToCart",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"1a696152-e03d-11f1-a297-002b67aa92f3\",\n  \"productId\": \"p01\",\n  \"sizeId\": \"fa53ee5c-e0ac-11f1-a297-002b67aa92f3\",\n  \"quantity\": 1,\n  \"colorId\": \"col11111-1111-1111-1111-111111111111\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cart/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cart",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Updated cart items",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"1a696152-e03d-11f1-a297-002b67aa92f3\",\n  \"productId\": \"p01\",\n  \"sizeId\": \"fa53ee5c-e0ac-11f1-a297-002b67aa92f3\",\n  \"quantity\": 1,\n  \"colorId\": \"col11111-1111-1111-1111-111111111111\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/cart/add",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cart",
+                    "add"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"ID\": \"aab98c48-e038-11f1-a297-002b67aa92f3\",\n    \"ProductID\": \"p01\",\n    \"SizeID\": \"fa53ee5c-e0ac-11f1-a297-002b67aa92f3\",\n    \"ColorID\": \"col11111-1111-1111-1111-111111111111\",\n    \"Quantity\": 1,\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"ImageUrl\": \"string\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"LineTotal\": 10791,\n    \"SizeName\": \"41\",\n    \"SizeStock\": 8,\n    \"IsOverStock\": 0,\n    \"ColorName\": \"Белый\"\n  },\n  {\n    \"ID\": \"aab98c48-e038-11f1-a297-002b67aa92f3\",\n    \"ProductID\": \"p01\",\n    \"SizeID\": \"fa53ee5c-e0ac-11f1-a297-002b67aa92f3\",\n    \"ColorID\": \"col11111-1111-1111-1111-111111111111\",\n    \"Quantity\": 1,\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"ImageUrl\": \"string\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"LineTotal\": 10791,\n    \"SizeName\": \"41\",\n    \"SizeStock\": 8,\n    \"IsOverStock\": 0,\n    \"ColorName\": \"Белый\"\n  }\n]"
+            },
+            {
+              "name": "OUT_OF_STOCK or SIZE_NOT_FOUND",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"1a696152-e03d-11f1-a297-002b67aa92f3\",\n  \"productId\": \"p01\",\n  \"sizeId\": \"fa53ee5c-e0ac-11f1-a297-002b67aa92f3\",\n  \"quantity\": 1,\n  \"colorId\": \"col11111-1111-1111-1111-111111111111\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/cart/add",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cart",
+                    "add"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "GetCartItemByID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cart/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cart",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "User's shopping cart items",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/cart/:userId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cart",
+                    ":userId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "userId",
+                      "value": "u1111111-1111-1111-1111-111111111111"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"ID\": \"aab98c48-e038-11f1-a297-002b67aa92f3\",\n    \"ProductID\": \"p01\",\n    \"SizeID\": \"fa53ee5c-e0ac-11f1-a297-002b67aa92f3\",\n    \"ColorID\": \"col11111-1111-1111-1111-111111111111\",\n    \"Quantity\": 1,\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"ImageUrl\": \"string\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"LineTotal\": 10791,\n    \"SizeName\": \"41\",\n    \"SizeStock\": 8,\n    \"IsOverStock\": 0,\n    \"ColorName\": \"Белый\"\n  },\n  {\n    \"ID\": \"aab98c48-e038-11f1-a297-002b67aa92f3\",\n    \"ProductID\": \"p01\",\n    \"SizeID\": \"fa53ee5c-e0ac-11f1-a297-002b67aa92f3\",\n    \"ColorID\": \"col11111-1111-1111-1111-111111111111\",\n    \"Quantity\": 1,\n    \"ProductName\": \"Кроссовки мужские Nike Air Zoom Pegasus\",\n    \"ImageUrl\": \"string\",\n    \"Price\": 11990,\n    \"Discount\": 10,\n    \"NewPrice\": 10791,\n    \"LineTotal\": 10791,\n    \"SizeName\": \"41\",\n    \"SizeStock\": 8,\n    \"IsOverStock\": 0,\n    \"ColorName\": \"Белый\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cart/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cart",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "u1111111-1111-1111-1111-111111111111"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Cart cleared",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/cart/:userId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cart",
+                    ":userId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "userId",
+                      "value": "u1111111-1111-1111-1111-111111111111"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pickup-points",
+      "item": [
+        {
+          "name": "Get active pickup points, stores, and lockers (usp_pickupPoints_GetAll)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pickup-points?pointType=partner",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pickup-points"
+              ],
+              "query": [
+                {
+                  "key": "pointType",
+                  "value": "partner"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "List of pickup points",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/pickup-points?pointType=partner",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pickup-points"
+                  ],
+                  "query": [
+                    {
+                      "key": "pointType",
+                      "value": "partner"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"PickupID\": \"pp-1\",\n    \"Name\": \"Спортмастер Томск\",\n    \"Address\": \"г. Томск, ТЦ \\\"Мегаполис\\\", пр-т. Ленина, д. 217/14\",\n    \"Latitude\": 56.4977,\n    \"Longitude\": 84.9744,\n    \"WorkingHours\": \"Пн-Вс: 10:00 - 22:00\",\n    \"StorageDays\": 14,\n    \"PointType\": \"store\",\n    \"PickupFee\": 100,\n    \"EtaDaysMin\": 0,\n    \"EtaDaysMax\": 1,\n    \"IsInstant\": 1,\n    \"PrepayPercent\": 100\n  },\n  {\n    \"PickupID\": \"pp-1\",\n    \"Name\": \"Спортмастер Томск\",\n    \"Address\": \"г. Томск, ТЦ \\\"Мегаполис\\\", пр-т. Ленина, д. 217/14\",\n    \"Latitude\": 56.4977,\n    \"Longitude\": 84.9744,\n    \"WorkingHours\": \"Пн-Вс: 10:00 - 22:00\",\n    \"StorageDays\": 14,\n    \"PointType\": \"store\",\n    \"PickupFee\": 100,\n    \"EtaDaysMin\": 0,\n    \"EtaDaysMax\": 1,\n    \"IsInstant\": 1,\n    \"PrepayPercent\": 100\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get pickup point details by ID (usp_pickupPoints_GetByID)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pickup-points/:pickupId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pickup-points",
+                ":pickupId"
+              ],
+              "variable": [
+                {
+                  "key": "pickupId",
+                  "value": "pp-1"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Pickup point details",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/pickup-points/:pickupId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pickup-points",
+                    ":pickupId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "pickupId",
+                      "value": "pp-1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"PickupID\": \"pp-1\",\n  \"Name\": \"Спортмастер Томск\",\n  \"Address\": \"г. Томск, ТЦ \\\"Мегаполис\\\", пр-т. Ленина, д. 217/14\",\n  \"Latitude\": 56.4977,\n  \"Longitude\": 84.9744,\n  \"WorkingHours\": \"Пн-Вс: 10:00 - 22:00\",\n  \"StorageDays\": 14,\n  \"PointType\": \"store\",\n  \"PickupFee\": 100,\n  \"EtaDaysMin\": 0,\n  \"EtaDaysMax\": 1,\n  \"IsInstant\": 1,\n  \"PrepayPercent\": 100\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "orders",
+      "item": [
+        {
+          "name": "GetOrderByUserID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orders/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "List of user orders",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders/user/:userId?status=4&page=1&pageSize=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "user",
+                    ":userId"
+                  ],
+                  "query": [
+                    {
+                      "description": "1=Created, 2=In transit, 3=Completed, 4=Cancelled",
+                      "key": "status",
+                      "value": "4"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "userId",
+                      "value": "1a696152-e03d-11f1-a297-002b67aa92f3"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"ID\": \"0532365b-e1a1-11f1-904e-002b67aa92f3\",\n    \"OrderNumber\": \"SM261116053239\",\n    \"Status\": 1,\n    \"DeliveryType\": \"pickup\",\n    \"PaymentType\": \"СБП\",\n    \"Subtotal\": 10791,\n    \"ShippingFee\": 0,\n    \"DiscountAmount\": 0,\n    \"TotalAmount\": 10791,\n    \"CreateDate\": \"1994-07-03T14:46:17.060Z\",\n    \"ItemCount\": 1,\n    \"FirstImageUrl\": \"string\",\n    \"TotalCount\": 5\n  },\n  {\n    \"ID\": \"0532365b-e1a1-11f1-904e-002b67aa92f3\",\n    \"OrderNumber\": \"SM261116053239\",\n    \"Status\": 1,\n    \"DeliveryType\": \"pickup\",\n    \"PaymentType\": \"СБП\",\n    \"Subtotal\": 10791,\n    \"ShippingFee\": 0,\n    \"DiscountAmount\": 0,\n    \"TotalAmount\": 10791,\n    \"CreateDate\": \"1963-04-19T14:24:43.610Z\",\n    \"ItemCount\": 1,\n    \"FirstImageUrl\": \"string\",\n    \"TotalCount\": 5\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "CancelOrder",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"1a696152-e03d-11f1-a297-002b67aa92f3\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orders/:orderId/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":orderId",
+                "cancel"
+              ],
+              "variable": [
+                {
+                  "key": "orderId",
+                  "value": "string"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Order cancelled",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"1a696152-e03d-11f1-a297-002b67aa92f3\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/:orderId/cancel",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "variable": [
+                    {
+                      "key": "orderId",
+                      "value": "string"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "GetConfirmation",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orders/:orderId/confirmation?userId=string",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":orderId",
+                "confirmation"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "string"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "orderId",
+                  "value": "0532365b-e1a1-11f1-904e-002b67aa92f3"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Order confirmation summary",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders/:orderId/confirmation?userId=string",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    ":orderId",
+                    "confirmation"
+                  ],
+                  "query": [
+                    {
+                      "key": "userId",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "orderId",
+                      "value": "0532365b-e1a1-11f1-904e-002b67aa92f3"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"OrderID\": \"0532365b-e1a1-11f1-904e-002b67aa92f3\",\n  \"OrderNumber\": \"SM261116053239\",\n  \"Status\": 1,\n  \"StatusText\": \"Создан\",\n  \"TotalAmount\": 10791,\n  \"PaymentType\": \"СБП\",\n  \"DeliveryType\": \"pickup\",\n  \"PickupName\": \"Спортмастер Томск\",\n  \"PickupAddress\": \"string\",\n  \"AvailableFrom\": \"1983-07-28\",\n  \"AvailableFromText\": \"16 ноября\",\n  \"PayBefore\": \"2020-08-01T14:24:51.338Z\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "GetOrderByOrderID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orders/:orderId?userId=string",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":orderId"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "string"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "orderId",
+                  "value": "0532365b-e1a1-11f1-904e-002b67aa92f3"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Order header and items",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders/:orderId?userId=string",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "query": [
+                    {
+                      "key": "userId",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "orderId",
+                      "value": "0532365b-e1a1-11f1-904e-002b67aa92f3"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"ID\": \"0532365b-e1a1-11f1-904e-002b67aa92f3\",\n  \"OrderNumber\": \"SM261116053239\",\n  \"Status\": 1,\n  \"DeliveryType\": \"pickup\",\n  \"PaymentType\": \"СБП\",\n  \"Subtotal\": 10791,\n  \"ShippingFee\": 0,\n  \"DiscountAmount\": 0,\n  \"TotalAmount\": 10791,\n  \"CreateDate\": \"1993-04-28T09:49:31.181Z\",\n  \"ItemCount\": 1,\n  \"FirstImageUrl\": \"string\",\n  \"TotalCount\": 5,\n  \"UserID\": \"string\",\n  \"PickupID\": \"pp-1\",\n  \"ShippingAddress\": \"string\",\n  \"ShippingPhone\": \"0999999999\",\n  \"PickupName\": \"Спортмастер Томск\",\n  \"PickupAddress\": \"string\",\n  \"PickupWorkingHours\": \"string\",\n  \"items\": [\n    {\n      \"ID\": \"string\",\n      \"ProductID\": \"p01\",\n      \"ProductName\": \"string\",\n      \"SizeName\": \"41\",\n      \"ColorName\": \"Белый\",\n      \"UnitPrice\": 10791,\n      \"Quantity\": 1,\n      \"LineTotal\": 10791\n    },\n    {\n      \"ID\": \"string\",\n      \"ProductID\": \"p01\",\n      \"ProductName\": \"string\",\n      \"SizeName\": \"41\",\n      \"ColorName\": \"Белый\",\n      \"UnitPrice\": 10791,\n      \"Quantity\": 1,\n      \"LineTotal\": 10791\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "CreateOrder",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"1a696152-e03d-11f1-a297-002b67aa92f3\",\n  \"deliveryType\": \"pickup\",\n  \"paymentType\": \"СБП\",\n  \"pickupId\": \"pp-1\",\n  \"shippingAddress\": \"Tomsk, Lenin Ave, 54\",\n  \"shippingPhone\": \"0999999999\",\n  \"shippingFee\": 0,\n  \"discountAmount\": 0\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orders",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Order created and stock deducted",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"1a696152-e03d-11f1-a297-002b67aa92f3\",\n  \"deliveryType\": \"pickup\",\n  \"paymentType\": \"СБП\",\n  \"pickupId\": \"pp-1\",\n  \"shippingAddress\": \"Tomsk, Lenin Ave, 54\",\n  \"shippingPhone\": \"0999999999\",\n  \"shippingFee\": 0,\n  \"discountAmount\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"ID\": \"0532365b-e1a1-11f1-904e-002b67aa92f3\",\n  \"OrderNumber\": \"SM261116053239\",\n  \"Status\": 1,\n  \"DeliveryType\": \"pickup\",\n  \"PaymentType\": \"СБП\",\n  \"Subtotal\": 10791,\n  \"ShippingFee\": 0,\n  \"DiscountAmount\": 0,\n  \"TotalAmount\": 10791,\n  \"CreateDate\": \"1993-04-28T09:49:31.181Z\",\n  \"ItemCount\": 1,\n  \"FirstImageUrl\": \"string\",\n  \"TotalCount\": 5,\n  \"UserID\": \"string\",\n  \"PickupID\": \"pp-1\",\n  \"ShippingAddress\": \"string\",\n  \"ShippingPhone\": \"0999999999\",\n  \"PickupName\": \"Спортмастер Томск\",\n  \"PickupAddress\": \"string\",\n  \"PickupWorkingHours\": \"string\",\n  \"items\": [\n    {\n      \"ID\": \"string\",\n      \"ProductID\": \"p01\",\n      \"ProductName\": \"string\",\n      \"SizeName\": \"41\",\n      \"ColorName\": \"Белый\",\n      \"UnitPrice\": 10791,\n      \"Quantity\": 1,\n      \"LineTotal\": 10791\n    },\n    {\n      \"ID\": \"string\",\n      \"ProductID\": \"p01\",\n      \"ProductName\": \"string\",\n      \"SizeName\": \"41\",\n      \"ColorName\": \"Белый\",\n      \"UnitPrice\": 10791,\n      \"Quantity\": 1,\n      \"LineTotal\": 10791\n    }\n  ]\n}"
+            },
+            {
+              "name": "CART_EMPTY or OUT_OF_STOCK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"1a696152-e03d-11f1-a297-002b67aa92f3\",\n  \"deliveryType\": \"pickup\",\n  \"paymentType\": \"СБП\",\n  \"pickupId\": \"pp-1\",\n  \"shippingAddress\": \"Tomsk, Lenin Ave, 54\",\n  \"shippingPhone\": \"0999999999\",\n  \"shippingFee\": 0,\n  \"discountAmount\": 0\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "UpdateStatus",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newStatus\": 2\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orders/:orderId/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":orderId",
+                "status"
+              ],
+              "variable": [
+                {
+                  "key": "orderId",
+                  "value": "string"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Order status updated",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"newStatus\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/:orderId/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    ":orderId",
+                    "status"
+                  ],
+                  "variable": [
+                    {
+                      "key": "orderId",
+                      "value": "string"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "system-keys",
+      "item": [
+        {
+          "name": "GetByID",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"parentId\": 0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/system-keys?parentId=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "system-keys"
+              ],
+              "query": [
+                {
+                  "key": "parentId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Filtered child system keys",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/system-keys/parent/:parentId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "system-keys",
+                    "parent",
+                    ":parentId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "parentId",
+                      "value": "1",
+                      "description": "e.g., 1=ORDER_STATUS, 10=PAYMENT_TYPE, 20=DELIVERY_TYPE, 90=SORT_TYPE"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"ID\": 2,\n    \"ParentID\": 1,\n    \"CodeKey\": \"ORDER_STATUS_1\",\n    \"CodeValue\": \"1\",\n    \"Description\": \"Создан\",\n    \"SortOrder\": 1\n  },\n  {\n    \"ID\": 2,\n    \"ParentID\": 1,\n    \"CodeKey\": \"ORDER_STATUS_1\",\n    \"CodeValue\": \"1\",\n    \"Description\": \"Создан\",\n    \"SortOrder\": 1\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "GetAll",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/system-keys/groups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "system-keys",
+                "groups"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "All active system keys",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/system-keys",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "system-keys"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"ID\": 2,\n    \"ParentID\": 1,\n    \"CodeKey\": \"ORDER_STATUS_1\",\n    \"CodeValue\": \"1\",\n    \"Description\": \"Создан\",\n    \"SortOrder\": 1\n  },\n  {\n    \"ID\": 2,\n    \"ParentID\": 1,\n    \"CodeKey\": \"ORDER_STATUS_1\",\n    \"CodeValue\": \"1\",\n    \"Description\": \"Создан\",\n    \"SortOrder\": 1\n  }\n]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Record product view history for a user (usp_productViews_Record)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"1a696152-e03d-11f1-a297-002b67aa92f3\"\n}",
+          "options": {
+            "raw": {
+              "headerFamily": "json",
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products/:productId/view",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "products",
+            ":productId",
+            "view"
+          ],
+          "variable": [
+            {
+              "key": "productId",
+              "value": "p01"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "View recorded",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"1a696152-e03d-11f1-a297-002b67aa92f3\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/products/:productId/view",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                ":productId",
+                "view"
+              ],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": "p01"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": [],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxYTY5NjE1Mi1lMDNkLTExZjEtYTI5Ny0wMDJiNjdhYTkyZjMiLCJpYXQiOjE3OTQ5OTMxNzQsImV4cCI6MTc5NTU5Nzk3NH0.3iv0naBsscoe4vU-DNkpnVuIEk-Vz4iFVGkh_ghrwDs",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api"
+    },
+    {
+      "key": "bearerToken",
+      "value": ""
+    }
+  ]
+}

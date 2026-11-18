@@ -1,0 +1,1028 @@
+openapi: 3.0.3
+info:
+  title: SportMaster Backend API
+  description: |
+    Complete OpenAPI 3.0 specification for SportMaster Backend
+    (Node.js + Express + MySQL Stored Procedures), organized by route modules.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api
+    description: Local dev server
+
+tags:
+  - name: users
+  - name: profile
+  - name: catalog
+  - name: banners
+  - name: products
+  - name: cart
+  - name: pickup-points
+  - name: orders
+  - name: system-keys
+
+security:
+  - bearerAuth: []
+
+# =========================================================
+# PATHS
+# =========================================================
+paths:
+
+  # -------------------- USERS --------------------
+  /users/register:
+    post:
+      tags: [users]
+      summary: Register a new user
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RegisterRequest' }
+      responses:
+        '201':
+          description: User registered successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+        '400':
+          description: Validation error (EMAIL_EXISTS, PHONE_EXISTS, USERNAME_EXISTS)
+
+  /users/login:
+    post:
+      tags: [users]
+      summary: Login with email + password
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/LoginRequest' }
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LoginResponse' }
+        '401':
+          description: Invalid credentials
+
+  /users/me:
+    get:
+      tags: [users]
+      summary: Get current user profile
+      responses:
+        '200':
+          description: User profile details
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+        '404':
+          description: User not found
+    put:
+      tags: [users]
+      summary: Update current user profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UpdateProfileRequest' }
+      responses:
+        '200':
+          description: Updated user profile
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+
+  /users/change-password:
+    put:
+      tags: [users]
+      summary: Change current user's password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ChangePasswordRequest' }
+      responses:
+        '200':
+          description: Password updated successfully
+
+  # -------------------- PROFILE --------------------
+  /profile/menu:
+    get:
+      tags: [profile]
+      summary: Get active profile menu items (usp_profile_GetMenu)
+      parameters:
+        - in: query
+          name: userId
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: List of profile menu items
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/MenuItem' }
+
+  # -------------------- CATALOG --------------------
+  /catalog/colors:
+    get:
+      tags: [catalog]
+      summary: Get all product colors (usp_colors_GetAll)
+      responses:
+        '200':
+          description: List of colors
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Color' }
+
+  /catalog/daily-deals:
+    get:
+      tags: [catalog]
+      summary: Get active daily deals (usp_dailyDeals_GetActive)
+      parameters:
+        - in: query
+          name: limit
+          schema: { type: integer, default: 20 }
+      responses:
+        '200':
+          description: Active daily deals with discounted prices
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/DailyDeal' }
+
+  /catalog/collections:
+    get:
+      tags: [catalog]
+      summary: Get all product collections (usp_collections_GetAll)
+      responses:
+        '200':
+          description: List of collections
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Collection' }
+
+  /catalog/sections:
+    get:
+      tags: [catalog]
+      summary: Get catalog navigation sections (usp_catalog_GetSections)
+      responses:
+        '200':
+          description: Catalog sections grouped by service, gender, category, sport
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/CatalogSection' }
+
+  /catalog/categories:
+    get:
+      tags: [catalog]
+      summary: Get all active categories or filter by ParentID
+      parameters:
+        - in: query
+          name: parentId
+          description: Optional Parent Category UUID
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: List of categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Category' }
+
+  /catalog/brands:
+    get:
+      tags: [catalog]
+      summary: Get all brands ordered by name (usp_brand_GetAll)
+      responses:
+        '200':
+          description: List of brands
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Brand' }
+
+  # -------------------- BANNERS --------------------
+  /banners:
+    get:
+      tags: [banners]
+      summary: Get active banners by type (usp_banners_GetByType)
+      parameters:
+        - in: query
+          name: type
+          description: '1 = Main, 2 = Discount, 3 = Single'
+          schema: { type: integer, enum: [1, 2, 3] }
+      responses:
+        '200':
+          description: List of active banners
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Banner' }
+
+  /banners/single:
+    get:
+      tags: [banners]
+      summary: Get primary single promo banner (usp_banners_GetSingle)
+      responses:
+        '200':
+          description: Single promotional banner
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Banner' }
+
+  # -------------------- PRODUCTS --------------------
+  /products:
+    get:
+      tags: [products]
+      summary: List products with filters
+      parameters:
+        - { in: query, name: categoryId, schema: { type: string, format: uuid } }
+        - { in: query, name: brandIds, description: 'Comma-separated BrandIDs', schema: { type: string } }
+        - { in: query, name: gender, description: '1=Men, 2=Women, 3=Unisex, 4=Kids', schema: { type: integer } }
+        - { in: query, name: sportType, schema: { type: string } }
+        - { in: query, name: season, schema: { type: string } }
+        - { in: query, name: sizes, description: 'Comma-separated sizes (e.g. 40,41,42)', schema: { type: string } }
+        - { in: query, name: colorIds, schema: { type: string } }
+        - { in: query, name: minPrice, schema: { type: number } }
+        - { in: query, name: maxPrice, schema: { type: number } }
+        - { in: query, name: onlySale, schema: { type: integer } }
+        - { in: query, name: keyword, schema: { type: string } }
+        - { in: query, name: sortBy, schema: { type: string, example: newest } }
+        - { in: query, name: page, schema: { type: integer, default: 1 } }
+        - { in: query, name: pageSize, schema: { type: integer, default: 20 } }
+        - { in: query, name: fastener, schema: { type: string } }
+        - { in: query, name: material, schema: { type: string } }
+        - { in: query, name: pronation, schema: { type: string } }
+        - { in: query, name: training, schema: { type: string } }
+        - { in: query, name: isBarefoot, schema: { type: integer } }
+        - { in: query, name: soleColor, schema: { type: string } }
+        - { in: query, name: shoeWidth, schema: { type: string } }
+        - { in: query, name: waterProtection, schema: { type: string } }
+        - { in: query, name: insulation, schema: { type: string } }
+        - { in: query, name: technologies, schema: { type: string } }
+        - { in: query, name: collectionIds, schema: { type: string } }
+        - { in: query, name: isBestPrice, schema: { type: integer } }
+        - { in: query, name: isNew, schema: { type: integer } }
+        - { in: query, name: isComingSoon, schema: { type: integer } }
+        - { in: query, name: isExclusive, schema: { type: integer } }
+        - { in: query, name: isPremium, schema: { type: integer } }
+        - { in: query, name: isEco, schema: { type: integer } }
+      responses:
+        '200':
+          description: Paginated product list
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/ProductSummary' }
+
+  /products/flag/{flag}:
+    get:
+      tags: [products]
+      summary: Get products by flag
+      parameters:
+        - in: path
+          name: flag
+          required: true
+          schema: { type: string, example: new_collection }
+        - in: query
+          name: limit
+          schema: { type: integer, default: 10 }
+      responses:
+        '200':
+          description: Filtered products by flag
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/ProductSummary' }
+
+  /products/{productId}:
+    get:
+      tags: [products]
+      summary: Get product detail by ID
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema: { type: string, example: p01 }
+      responses:
+        '200':
+          description: Full product detail object
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProductDetail' }
+        '404':
+          description: Product not found
+
+  /products/{productId}/related:
+    get:
+      tags: [products]
+      summary: Get related products
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema: { type: string }
+        - in: query
+          name: limit
+          schema: { type: integer, default: 10 }
+      responses:
+        '200':
+          description: Related products
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/ProductSummary' }
+
+  /products/{productId}/frequently-bought:
+    get:
+      tags: [products]
+      summary: Get frequently bought together products
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema: { type: string }
+        - in: query
+          name: limit
+          schema: { type: integer, default: 10 }
+      responses:
+        '200':
+          description: Frequently bought together products
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/ProductSummary' }
+
+  /products/{productId}/sections:
+    get:
+      tags: [products]
+      summary: Get product editorial sections
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Product editorial sections
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/ProductSection' }
+
+  /products/{productId}/specs:
+    get:
+      tags: [products]
+      summary: Get product specifications
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Product specifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/ProductSpec' }
+
+  /products/{productId}/view:
+    post:
+      tags: [products]
+      summary: Record product view history for a user (usp_productViews_Record)
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userId]
+              properties:
+                userId: { type: string, format: uuid }
+      responses:
+        '200':
+          description: View recorded
+
+  # -------------------- CART --------------------
+  /cart/:
+    post:
+      tags: [cart]
+      summary: Add item to cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AddToCartRequest' }
+      responses:
+        '200':
+          description: Updated cart items
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/CartItem' }
+        '400':
+          description: OUT_OF_STOCK or SIZE_NOT_FOUND
+    get:
+      tags: [cart]
+      summary: Get current user's cart items
+      responses:
+        '200':
+          description: User's shopping cart items
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/CartItem' }
+
+  /cart/{userId}:
+    delete:
+      tags: [cart]
+      summary: Clear user's cart
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Cart cleared
+
+  # -------------------- PICKUP POINTS --------------------
+  /pickup-points:
+    get:
+      tags: [pickup-points]
+      summary: Get active pickup points, stores, and lockers (usp_pickupPoints_GetAll)
+      parameters:
+        - in: query
+          name: pointType
+          schema: { type: string, example: partner }
+      responses:
+        '200':
+          description: List of pickup points
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/PickupPoint' }
+
+  /pickup-points/{pickupId}:
+    get:
+      tags: [pickup-points]
+      summary: Get pickup point details by ID (usp_pickupPoints_GetByID)
+      parameters:
+        - in: path
+          name: pickupId
+          required: true
+          schema: { type: string, example: pp-1 }
+      responses:
+        '200':
+          description: Pickup point details
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PickupPoint' }
+
+  # -------------------- ORDERS --------------------
+  /orders/:
+    get:
+      tags: [orders]
+      summary: Get orders of the current user
+      parameters:
+        - in: query
+          name: status
+          description: '1=Created, 2=In transit, 3=Completed, 4=Cancelled'
+          schema: { type: integer }
+        - in: query
+          name: page
+          schema: { type: integer, default: 1 }
+        - in: query
+          name: pageSize
+          schema: { type: integer, default: 10 }
+      responses:
+        '200':
+          description: List of user orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/OrderSummary' }
+    post:
+      tags: [orders]
+      summary: Create an order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateOrderRequest' }
+      responses:
+        '201':
+          description: Order created and stock deducted
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OrderDetail' }
+        '400':
+          description: CART_EMPTY or OUT_OF_STOCK
+
+  /orders/{orderId}:
+    get:
+      tags: [orders]
+      summary: Get order by ID
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema: { type: string, format: uuid }
+        - in: query
+          name: userId
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Order header and items
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OrderDetail' }
+
+  /orders/{orderId}/cancel:
+    post:
+      tags: [orders]
+      summary: Cancel an order
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userId]
+              properties:
+                userId: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Order cancelled
+
+  /orders/{orderId}/confirmation:
+    get:
+      tags: [orders]
+      summary: Get order confirmation summary
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema: { type: string, format: uuid }
+        - in: query
+          name: userId
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Order confirmation summary
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OrderConfirmation' }
+
+  /orders/{orderId}/status:
+    patch:
+      tags: [orders]
+      summary: Update order status
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [newStatus]
+              properties:
+                newStatus: { type: integer, example: 2 }
+      responses:
+        '200':
+          description: Order status updated
+
+  # -------------------- SYSTEM KEYS --------------------
+  /system-keys:
+    get:
+      tags: [system-keys]
+      summary: Get system keys filtered by parentId
+      parameters:
+        - in: query
+          name: parentId
+          schema: { type: integer, example: 1 }
+      responses:
+        '200':
+          description: Filtered child system keys
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/SystemKey' }
+
+  /system-keys/groups:
+    get:
+      tags: [system-keys]
+      summary: Get all active system keys
+      responses:
+        '200':
+          description: All active system keys
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/SystemKey' }
+
+# =========================================================
+# COMPONENTS
+# =========================================================
+components:
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+
+    # ---------- Users ----------
+    RegisterRequest:
+      type: object
+      required: [fullName, password, email, userName, phone]
+      properties:
+        fullName: { type: string, example: Linh Pham }
+        password: { type: string, example: Secret123! }
+        email: { type: string, format: email }
+        userName: { type: string }
+        phone: { type: string }
+        address: { type: string }
+        sex: { type: integer, enum: [0, 1] }
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string }
+
+    LoginResponse:
+      type: object
+      properties:
+        token: { type: string }
+        user: { $ref: '#/components/schemas/User' }
+
+    UpdateProfileRequest:
+      type: object
+      properties:
+        fullName: { type: string }
+        userName: { type: string }
+        phone: { type: string }
+        address: { type: string }
+        sex: { type: integer }
+
+    ChangePasswordRequest:
+      type: object
+      required: [oldPassword, newPassword]
+      properties:
+        oldPassword: { type: string }
+        newPassword: { type: string }
+
+    User:
+      type: object
+      properties:
+        UserID: { type: string, format: uuid }
+        FullName: { type: string }
+        UserName: { type: string }
+        Email: { type: string, format: email }
+        Phone: { type: string }
+        Address: { type: string }
+        Sex: { type: integer }
+        BonusPoints: { type: integer }
+        MembershipRank: { type: integer }
+        CreatedDate: { type: string, format: date-time }
+        UpdateDate: { type: string, format: date-time }
+
+    # ---------- Profile ----------
+    MenuItem:
+      type: object
+      properties:
+        MenuID: { type: string, format: uuid }
+        Title: { type: string }
+        Icon: { type: string }
+        BadgeText: { type: string, nullable: true }
+        IsNew: { type: integer, enum: [0, 1] }
+        SortOrder: { type: integer }
+
+    # ---------- Catalog ----------
+    Color:
+      type: object
+      properties:
+        ColorID: { type: string }
+        ColorName: { type: string }
+        ColorType: { type: string }
+
+    DailyDeal:
+      type: object
+      properties:
+        DealID: { type: string, format: uuid }
+        ProductID: { type: string }
+        StartAt: { type: string, format: date-time }
+        EndAt: { type: string, format: date-time }
+        ProductName: { type: string }
+        SKU: { type: string }
+        Price: { type: number }
+        Discount: { type: number }
+        NewPrice: { type: number }
+        ImageUrl: { type: string }
+
+    Collection:
+      type: object
+      properties:
+        CollectionID: { type: string }
+        CollectionName: { type: string }
+
+    CatalogSection:
+      type: object
+      properties:
+        ItemID: { type: string }
+        SectionType: { type: string, example: gender }
+        Title: { type: string }
+        ImageUrl: { type: string }
+        LinkUrl: { type: string }
+        SortOrder: { type: integer }
+
+    Category:
+      type: object
+      properties:
+        CategoryID: { type: string, format: uuid }
+        Name: { type: string }
+        Icon: { type: string }
+        ParentID: { type: string, format: uuid, nullable: true }
+        IsActive: { type: boolean }
+
+    Brand:
+      type: object
+      properties:
+        BrandID: { type: string, format: uuid }
+        Name: { type: string }
+        logo_url: { type: string }
+
+    # ---------- Banners ----------
+    Banner:
+      type: object
+      properties:
+        BannerID: { type: string, format: uuid }
+        Title: { type: string }
+        ImageUrl: { type: string }
+        LinkUrl: { type: string }
+        IsActive: { type: integer, enum: [0, 1] }
+        DisplayOrder: { type: integer }
+        Type: { type: integer, enum: [1, 2, 3] }
+
+    # ---------- Products ----------
+    ProductSummary:
+      type: object
+      properties:
+        ProductID: { type: string }
+        ProductName: { type: string }
+        SKU: { type: string }
+        Price: { type: number }
+        Discount: { type: number }
+        NewPrice: { type: number }
+        CategoryID: { type: string, format: uuid }
+        BrandID: { type: string, format: uuid }
+        BrandName: { type: string }
+        CategoryName: { type: string }
+        Gender: { type: integer }
+        Season: { type: string }
+        SportType: { type: string }
+        ImageUrl: { type: string }
+        TotalStock: { type: integer }
+        TotalCount: { type: integer }
+        TotalPages: { type: integer }
+        CurrentPage: { type: integer }
+
+    ProductDetail:
+      allOf:
+        - $ref: '#/components/schemas/ProductSummary'
+        - type: object
+          properties:
+            Description: { type: string }
+            BonusAmount: { type: number }
+            UpperMaterial: { type: string }
+            Fastener: { type: string }
+            WaterProtection: { type: string }
+            Insulation: { type: string }
+            Pronation: { type: string }
+            TrainingType: { type: string }
+            ShoeWidth: { type: string }
+            SoleColor: { type: string }
+            SizesJson:
+              type: array
+              items:
+                type: object
+                properties:
+                  sizeID: { type: string, format: uuid }
+                  size: { type: string }
+                  stock: { type: integer }
+                  cm: { type: number }
+            ColorsJson:
+              type: array
+              items:
+                type: object
+                properties:
+                  colorID: { type: string }
+                  name: { type: string }
+                  type: { type: string }
+            TechnologiesJson:
+              type: array
+              items: { type: string }
+            CharacteristicsJson:
+              type: array
+              items:
+                type: object
+                properties:
+                  key: { type: string }
+                  value: { type: string }
+            AvgRating: { type: number }
+            ReviewCount: { type: integer }
+
+    ProductSection:
+      type: object
+      properties:
+        SectionKey: { type: string, example: technology }
+        Title: { type: string }
+        Body: { type: string }
+
+    ProductSpec:
+      type: object
+      properties:
+        GroupTitle: { type: string }
+        Label: { type: string }
+        SpecValue: { type: string }
+        SortOrder: { type: integer }
+
+    # ---------- Cart ----------
+    AddToCartRequest:
+      type: object
+      required: [userId, productId, sizeId, quantity]
+      properties:
+        userId: { type: string, format: uuid }
+        productId: { type: string }
+        sizeId: { type: string, format: uuid }
+        quantity: { type: integer, minimum: 1 }
+        colorId: { type: string }
+
+    CartItem:
+      type: object
+      properties:
+        ID: { type: string, format: uuid }
+        ProductID: { type: string }
+        SizeID: { type: string, format: uuid }
+        ColorID: { type: string }
+        Quantity: { type: integer }
+        ProductName: { type: string }
+        ImageUrl: { type: string }
+        Price: { type: number }
+        Discount: { type: number }
+        NewPrice: { type: number }
+        LineTotal: { type: number }
+        SizeName: { type: string }
+        SizeStock: { type: integer }
+        IsOverStock: { type: integer, enum: [0, 1] }
+        ColorName: { type: string }
+
+    # ---------- Pickup Points ----------
+    PickupPoint:
+      type: object
+      properties:
+        PickupID: { type: string }
+        Name: { type: string }
+        Address: { type: string }
+        Latitude: { type: number }
+        Longitude: { type: number }
+        WorkingHours: { type: string }
+        StorageDays: { type: integer }
+        PointType: { type: string, example: store }
+        PickupFee: { type: number }
+        EtaDaysMin: { type: integer }
+        EtaDaysMax: { type: integer }
+        IsInstant: { type: integer, enum: [0, 1] }
+        PrepayPercent: { type: integer }
+
+    # ---------- Orders ----------
+    CreateOrderRequest:
+      type: object
+      required: [userId, deliveryType, paymentType]
+      properties:
+        userId: { type: string, format: uuid }
+        deliveryType: { type: string, example: pickup }
+        paymentType: { type: string, example: СБП }
+        pickupId: { type: string }
+        shippingAddress: { type: string }
+        shippingPhone: { type: string }
+        shippingFee: { type: number }
+        discountAmount: { type: number }
+
+    OrderSummary:
+      type: object
+      properties:
+        ID: { type: string, format: uuid }
+        OrderNumber: { type: string }
+        Status: { type: integer }
+        DeliveryType: { type: string }
+        PaymentType: { type: string }
+        Subtotal: { type: number }
+        ShippingFee: { type: number }
+        DiscountAmount: { type: number }
+        TotalAmount: { type: number }
+        CreateDate: { type: string, format: date-time }
+        ItemCount: { type: integer }
+        FirstImageUrl: { type: string }
+        TotalCount: { type: integer }
+
+    OrderDetail:
+      allOf:
+        - $ref: '#/components/schemas/OrderSummary'
+        - type: object
+          properties:
+            UserID: { type: string, format: uuid }
+            PickupID: { type: string }
+            ShippingAddress: { type: string }
+            ShippingPhone: { type: string }
+            PickupName: { type: string }
+            PickupAddress: { type: string }
+            PickupWorkingHours: { type: string }
+            items:
+              type: array
+              items: { $ref: '#/components/schemas/OrderItem' }
+
+    OrderItem:
+      type: object
+      properties:
+        ID: { type: string }
+        ProductID: { type: string }
+        ProductName: { type: string }
+        SizeName: { type: string }
+        ColorName: { type: string }
+        UnitPrice: { type: number }
+        Quantity: { type: integer }
+        LineTotal: { type: number }
+
+    OrderConfirmation:
+      type: object
+      properties:
+        OrderID: { type: string, format: uuid }
+        OrderNumber: { type: string }
+        Status: { type: integer }
+        StatusText: { type: string }
+        TotalAmount: { type: number }
+        PaymentType: { type: string }
+        DeliveryType: { type: string }
+        PickupName: { type: string }
+        PickupAddress: { type: string }
+        AvailableFrom: { type: string, format: date }
+        AvailableFromText: { type: string }
+        PayBefore: { type: string, format: date-time }
+
+    # ---------- System Keys ----------
+    SystemKey:
+      type: object
+      properties:
+        ID: { type: integer }
+        ParentID: { type: integer }
+        CodeKey: { type: string, example: ORDER_STATUS_1 }
+        CodeValue: { type: string }
+        Description: { type: string }
+        SortOrder: { type: integer }
